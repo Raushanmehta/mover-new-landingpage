@@ -108,13 +108,15 @@ export default function TestimonialSection() {
                             className="-right-3 sm:-right-6 md:-right-8 lg:-right-12 xl:-right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-[#C46D77]/40 text-gray-900 hover:bg-[#C46D77] hover:text-white transition-all shadow-md cursor-pointer"
                         />
 
-                        <CarouselContent className="-ml-4">
+                        <CarouselContent className="-ml-4 items-stretch">
                             {testimonials.map((item) => (
                                 <CarouselItem
                                     key={item.id}
-                                    className="pl-4 md:basis-1/2 lg:basis-1/3"
+                                    className="pl-4 md:basis-1/2 lg:basis-1/3 flex flex-col"
                                 >
-                                    <TestimonialCard item={item} />
+                                    <div className="w-full h-full flex flex-col">
+                                        <TestimonialCard item={item} />
+                                    </div>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>

@@ -2,132 +2,124 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiArrowRight, HiMenu, HiX } from "react-icons/hi";
-import Image from "next/image";
 import site from "@/data/index";
-import {
-    navbarSlideDown,
-    navItemVariants,
-    mobileMenuVariants,
-    mobileItemVariants,
-    springTransition,
-} from "@/utils/animations";
-
 import { useContactModal } from "@/components/common/ContactModalContext";
 
 export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+    const [activeSection, setActiveSection] = useState("/");
     const data = site.navbar;
-    const navItems = data.navItems;
     const { openModal } = useContactModal();
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("hero");
-    const pathname = usePathname() || "/";
 
-    // Scroll spy
+    // Scroll spy & hash navigation
     useEffect(() => {
-        const sections = ["hero", "about", "services", "why-choose-us", "team", "testimonials", "faqs"];
+        const sections = [
+            { id: "hero", href: "/" },
+            { id: "about", href: "#about" },
+            { id: "services", href: "#services" },
+            { id: "why-choose-us", href: "#why-choose-us" },
+            { id: "team", href: "#team" },
+            { id: "testimonials", href: "#testimonials" },
+            { id: "faqs", href: "#faqs" },
+        ];
 
         const handleScroll = () => {
             const scrollY = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const docHeight = document.documentElement.scrollHeight;
-
-            if (scrollY + windowHeight >= docHeight - 80) {
-                setActiveSection("faqs");
+            if (scrollY < 60) {
+                setActiveSection("/");
                 return;
             }
 
-            if (scrollY < 90) {
-                setActiveSection("hero");
+            if (window.innerHeight + scrollY >= document.documentElement.scrollHeight - 50) {
+                setActiveSection("#faqs");
                 return;
             }
 
-            const probeY = scrollY + 110;
             for (let i = sections.length - 1; i >= 0; i--) {
-                const el = document.getElementById(sections[i]);
+                const el = document.getElementById(sections[i].id);
                 if (el) {
-                    const top = el.offsetTop;
-                    if (probeY >= top) {
-                        setActiveSection(sections[i]);
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top <= 100) {
+                        setActiveSection(sections[i].href);
                         return;
                     }
                 }
             }
         };
 
+        const lenis = (window as unknown as { __lenis?: { on?: (event: string, cb: () => void) => void; off?: (event: string, cb: () => void) => void } }).__lenis;
+        if (lenis?.on) {
+            lenis.on("scroll", handleScroll);
+        }
         window.addEventListener("scroll", handleScroll, { passive: true });
         handleScroll();
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        // Initial hash scroll
+        if (typeof window !== "undefined" && window.location.hash) {
+            const hash = window.location.hash;
+            const target = document.querySelector(hash) as HTMLElement | null;
+            if (target) {
+                setTimeout(() => {
+                    const navHeight = 80;
+                    const targetY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navHeight);
+                    const l = (window as unknown as { __lenis?: { scrollTo: (t: number, opts?: { duration?: number }) => void } }).__lenis;
+                    if (l) {
+                        l.scrollTo(targetY, { duration: 0.85 });
+                    } else {
+                        window.scrollTo({ top: targetY, behavior: "smooth" });
+                    }
+                    setActiveSection(hash);
+                }, 200);
+            }
+        }
+
+        return () => {
+            if (lenis?.off) {
+                lenis.off("scroll", handleScroll);
+            }
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
-    const isItemActive = (href: string) => {
-        if (href === "/" || href === "#hero") {
-            return !activeSection || activeSection === "hero";
-        }
-        if (href.startsWith("#")) {
-            return activeSection === href.slice(1);
-        }
-        return pathname === href;
-    };
-
     // Nav click
-    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-        setMobileMenuOpen(false);
-
-        if (pathname !== "/") {
-            return;
-        }
-
+    const handleNavClick = (e: React.MouseEvent, href: string) => {
         e.preventDefault();
+        setIsOpen(false);
+        setActiveSection(href);
 
-        const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number | HTMLElement | string, opts?: { offset?: number; duration?: number }) => void } }).__lenis;
+        if (typeof window === "undefined") return;
 
-        if (href === "/" || href === "#" || href === "#hero") {
-            setActiveSection("hero");
+        if (href === "/" || href === "#hero") {
+            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, opts?: { duration?: number }) => void } }).__lenis;
             if (lenis) {
-                lenis.scrollTo(0, { duration: 0.9 });
+                lenis.scrollTo(0, { duration: 0.85 });
             } else {
                 window.scrollTo({ top: 0, behavior: "smooth" });
             }
-            if (window.location.hash) {
-                window.history.pushState(null, "", "/");
-            }
+            window.history.pushState(null, "", "/");
             return;
         }
 
-        if (href.startsWith("#")) {
-            const targetId = href.slice(1);
-            const targetEl = document.getElementById(targetId);
-            if (targetEl) {
-                setActiveSection(targetId);
-                if (lenis) {
-                    lenis.scrollTo(targetEl, { duration: 0.9 });
-                } else {
-                    targetEl.scrollIntoView({ behavior: "smooth" });
-                }
-                window.history.pushState(null, "", href);
+        const target = document.querySelector(href) as HTMLElement | null;
+        if (target) {
+            const navHeight = 80;
+            const targetY = Math.max(0, target.getBoundingClientRect().top + window.scrollY - navHeight);
+            const lenis = (window as unknown as { __lenis?: { scrollTo: (t: number, opts?: { duration?: number }) => void } }).__lenis;
+            if (lenis) {
+                lenis.scrollTo(targetY, { duration: 0.85 });
+            } else {
+                window.scrollTo({ top: targetY, behavior: "smooth" });
             }
+            window.history.pushState(null, "", href);
         }
     };
 
-    // CTA click
-    const handleCtaClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        openModal();
-        setMobileMenuOpen(false);
-    };
-
     return (
-        <motion.nav
-            variants={navbarSlideDown}
-            initial="hidden"
-            animate="visible"
-            className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all"
-        >
+        <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 flex items-center justify-between h-20">
-
                 {/* Brand logo */}
                 <Link href="/" onClick={(e) => handleNavClick(e, "/")} className="flex items-center">
                     <Image
@@ -141,50 +133,40 @@ export default function Navbar() {
                 </Link>
 
                 {/* Desktop navigation */}
-                <div className="hidden lg:flex items-center gap-7 xl:gap-8">
-                    {navItems.map((item) => {
-                        const active = isItemActive(item.href);
-                        const linkHref = pathname === "/" ? item.href : (item.href.startsWith("#") ? `/${item.href}` : item.href);
+                <nav className="hidden lg:flex items-center gap-7 xl:gap-8">
+                    {data.navItems.map((item) => {
+                        const isActive = activeSection === item.href;
                         return (
-                            <motion.div
+                            <Link
                                 key={item.name}
-                                variants={navItemVariants}
-                                whileHover={{ y: -1 }}
-                                className="relative"
+                                href={item.href}
+                                onClick={(e) => handleNavClick(e, item.href)}
+                                className={`relative py-2 text-sm xl:text-base font-medium transition-colors duration-200 block ${isActive
+                                    ? "text-[#C46D77] font-semibold"
+                                    : "text-gray-800 hover:text-[#C46D77]"
+                                }`}
                             >
-                                <Link
-                                    href={linkHref}
-                                    onClick={(e) => handleNavClick(e, item.href)}
-                                    className={`relative py-2 text-sm xl:text-base font-medium transition-colors duration-200 block ${active
-                                        ? "text-[#C46D77] font-semibold"
-                                        : "text-gray-800 hover:text-[#C46D77]"
-                                        }`}
-                                >
-                                    {item.name}
-
-                                    {/* Active indicator */}
-                                    {active && (
-                                        <motion.div
-                                            layoutId="activeTab"
-                                            className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#C46D77]"
-                                            transition={springTransition}
-                                        />
-                                    )}
-                                </Link>
-                            </motion.div>
+                                <span>{item.name}</span>
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="activeTab"
+                                        className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-[#C46D77]"
+                                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                                    />
+                                )}
+                            </Link>
                         );
                     })}
-                </div>
+                </nav>
 
                 {/* Action items */}
                 <div className="flex items-center gap-3 sm:gap-4">
-
-                    {/* Vertical divider */}
                     <span className="hidden lg:block h-6 w-[1px] bg-[#C46D77]/40" />
 
-                    {/* Quote button */}
+                    {/* Book Now button */}
                     <button
-                        onClick={handleCtaClick}
+                        type="button"
+                        onClick={() => openModal()}
                         data-open-modal="contact"
                         className="group hidden sm:flex items-center gap-2 bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-5 sm:px-6 py-2.5 shadow-md hover:shadow-lg hover:shadow-[#C46D77]/25 transition-all text-xs sm:text-sm uppercase tracking-wider cursor-pointer"
                     >
@@ -192,79 +174,75 @@ export default function Navbar() {
                         <HiArrowRight className="text-base transition-transform group-hover:translate-x-1" />
                     </button>
 
-                    {/* Menu toggle */}
+                    {/* Mobile menu toggle */}
                     <motion.button
                         whileTap={{ scale: 0.9 }}
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        onClick={() => setIsOpen(!isOpen)}
                         className="lg:hidden text-gray-800 hover:text-[#C46D77] p-1.5 transition-colors focus:outline-none cursor-pointer"
                         aria-label="Toggle Navigation"
                     >
-                        {mobileMenuOpen ? (
-                            <HiX className="text-3xl" />
-                        ) : (
-                            <HiMenu className="text-3xl" />
-                        )}
+                        {isOpen ? <HiX className="text-3xl" /> : <HiMenu className="text-3xl" />}
                     </motion.button>
                 </div>
             </div>
 
             {/* Mobile menu */}
             <AnimatePresence>
-                {mobileMenuOpen && (
+                {isOpen && (
                     <>
-                        {/* Mobile backdrop */}
-                        <div
-                            className="fixed inset-0 top-20 bg-black/25 backdrop-blur-xs z-40 lg:hidden"
-                            onClick={() => setMobileMenuOpen(false)}
-                        />
-
-                        {/* Mobile drawer */}
                         <motion.div
-                            variants={mobileMenuVariants}
-                            initial="hidden"
-                            animate="visible"
-                            exit="hidden"
-                            className="lg:hidden relative z-50 bg-white border-t border-gray-100 px-4 pt-3 pb-6 shadow-2xl overflow-hidden"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="fixed inset-0 top-20 bg-black/40 backdrop-blur-xs z-40 lg:hidden"
+                            onClick={() => setIsOpen(false)}
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.25, ease: "easeInOut" }}
+                            className="lg:hidden absolute top-full left-0 right-0 z-50 bg-white border-t border-gray-100 px-4 pt-3 pb-6 shadow-2xl overflow-hidden"
                         >
                             <div className="space-y-1">
-                                {navItems.map((item) => {
-                                    const active = isItemActive(item.href);
-                                    const linkHref = pathname === "/" ? item.href : (item.href.startsWith("#") ? `/${item.href}` : item.href);
+                                {data.navItems.map((item) => {
+                                    const isActive = activeSection === item.href;
                                     return (
-                                        <motion.div key={item.name} variants={mobileItemVariants}>
-                                            <Link
-                                                href={linkHref}
-                                                onClick={(e) => handleNavClick(e, item.href)}
-                                                className={`flex items-center justify-between px-3.5 py-2.5 text-sm font-medium transition-all ${active
-                                                    ? "text-[#C46D77] bg-[#C46D77]/10 font-semibold border-l-2 border-[#C46D77]"
-                                                    : "text-gray-700 hover:text-[#C46D77] hover:bg-gray-50"
-                                                    }`}
-                                            >
-                                                <span>{item.name}</span>
-                                                {active && (
-                                                    <span className="w-1.5 h-1.5 bg-[#C46D77]" />
-                                                )}
-                                            </Link>
-                                        </motion.div>
+                                        <Link
+                                            key={item.name}
+                                            href={item.href}
+                                            onClick={(e) => handleNavClick(e, item.href)}
+                                            className={`flex items-center justify-between px-3.5 py-2.5 text-sm font-medium transition-all ${isActive
+                                                ? "text-[#C46D77] bg-[#C46D77]/10 font-semibold border-l-2 border-[#C46D77]"
+                                                : "text-gray-700 hover:text-[#C46D77] hover:bg-gray-50"
+                                            }`}
+                                        >
+                                            <span>{item.name}</span>
+                                            {isActive && <span className="w-1.5 h-1.5 bg-[#C46D77]" />}
+                                        </Link>
                                     );
                                 })}
                             </div>
 
-                            {/* Mobile action */}
-                            <motion.div variants={mobileItemVariants} className="pt-4 mt-2 border-t border-gray-100">
+                            <div className="pt-4 mt-2 border-t border-gray-100">
                                 <button
-                                    onClick={handleCtaClick}
+                                    type="button"
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        openModal();
+                                    }}
                                     data-open-modal="contact"
                                     className="group flex items-center justify-center gap-2 w-full bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-5 py-3 shadow text-center text-xs uppercase tracking-wider transition-all cursor-pointer"
                                 >
                                     <span>{data.ctaButton.text}</span>
                                     <HiArrowRight className="text-base transition-transform group-hover:translate-x-1" />
                                 </button>
-                            </motion.div>
+                            </div>
                         </motion.div>
                     </>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </header>
     );
 }

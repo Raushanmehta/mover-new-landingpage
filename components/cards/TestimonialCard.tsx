@@ -34,7 +34,7 @@ export default function TestimonialCard({
             key={data.id}
             variants={cardVariants}
             whileHover={cardHover.hover}
-            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 grid grid-cols-1 sm:grid-cols-2 border border-rose-50 h-full"
+            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 grid grid-cols-1 sm:grid-cols-2 border border-rose-50 h-full w-full min-h-[250px]"
         >
             {/* Client image */}
             <div className="relative w-full h-[220px] sm:h-full min-h-[220px]">
@@ -48,7 +48,7 @@ export default function TestimonialCard({
             </div>
 
             {/* Quote and details */}
-            <div className="p-5 flex flex-col justify-between gap-2">
+            <div className="p-5 flex flex-col justify-between gap-2 h-full">
                 <FaQuoteLeft className="text-[#C46D77]/60 text-2xl" />
 
                 <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
