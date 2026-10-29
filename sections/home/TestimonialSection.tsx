@@ -45,39 +45,39 @@ export default function TestimonialSection() {
     }, [api]);
 
     return (
-        <section className="w-full bg-[#FAF9F6] py-8 lg:py-14 overflow-hidden relative">
+        <section id="testimonials" className="w-full bg-white py-8 lg:py-14 overflow-hidden relative scroll-mt-20">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16">
-                {/* Header */}
+                {/* Header container */}
                 <motion.div
                     initial="hidden"
                     whileInView="visible"
                     viewport={defaultViewport}
                     className="text-center max-w-3xl mx-auto mb-6 lg:mb-8 flex flex-col items-center gap-2"
                 >
-                    {/* Subtitle */}
+                    {/* Subtitle text */}
                     <motion.div
                         variants={subtitleVariants}
-                        className="flex items-center gap-3 text-[#D89B33]"
+                        className="flex items-center gap-3 text-[#C46D77]"
                     >
-                        <span className="w-8 md:w-10 h-[1.5px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-10 h-[1.5px] bg-[#C46D77]" />
                         <span className="text-xs md:text-base uppercase tracking-[0.25em] font-semibold">
                             {data.subtitle}
                         </span>
-                        <span className="w-8 md:w-10 h-[1.5px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-10 h-[1.5px] bg-[#C46D77]" />
                     </motion.div>
 
-                    {/* Headline */}
+                    {/* Main headline */}
                     <motion.h2
                         variants={titleVariants}
                         className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 leading-tight"
                     >
                         {data.title}{" "}
-                        <span className="bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] bg-clip-text text-transparent font-bold">
+                        <span className="bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] bg-clip-text text-transparent font-bold">
                             {data.titleHighlight}
                         </span>
                     </motion.h2>
 
-                    {/* Description */}
+                    {/* Description text */}
                     <motion.p
                         variants={descVariants}
                         className="text-gray-600 text-sm sm:text-base leading-relaxed"
@@ -86,7 +86,7 @@ export default function TestimonialSection() {
                     </motion.p>
                 </motion.div>
 
-                {/* Carousel */}
+                {/* Carousel wrapper */}
                 <motion.div
                     variants={fadeInUp}
                     initial="hidden"
@@ -102,10 +102,10 @@ export default function TestimonialSection() {
                         className="relative w-full"
                     >
                         <CarouselPrevious
-                            className="-left-3 sm:-left-6 md:-left-8 lg:-left-12 xl:-left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-amber-100/80 border border-[#D89B33]/40 text-gray-900 hover:bg-[#D89B33] hover:text-white transition-all shadow-md cursor-pointer"
+                            className="-left-3 sm:-left-6 md:-left-8 lg:-left-12 xl:-left-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-[#C46D77]/40 text-gray-900 hover:bg-[#C46D77] hover:text-white transition-all shadow-md cursor-pointer"
                         />
                         <CarouselNext
-                            className="-right-3 sm:-right-6 md:-right-8 lg:-right-12 xl:-right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-amber-100/80 border border-[#D89B33]/40 text-gray-900 hover:bg-[#D89B33] hover:text-white transition-all shadow-md cursor-pointer"
+                            className="-right-3 sm:-right-6 md:-right-8 lg:-right-12 xl:-right-14 top-1/2 -translate-y-1/2 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-rose-50 border border-[#C46D77]/40 text-gray-900 hover:bg-[#C46D77] hover:text-white transition-all shadow-md cursor-pointer"
                         />
 
                         <CarouselContent className="-ml-4">
@@ -121,7 +121,7 @@ export default function TestimonialSection() {
                     </Carousel>
                 </motion.div>
 
-                {/* Pagination */}
+                {/* Pagination dots */}
                 <div className="flex items-center justify-center gap-2 mt-8 lg:mt-10">
                     {testimonials.map((_, index) => (
                         <button
@@ -129,8 +129,8 @@ export default function TestimonialSection() {
                             onClick={() => api?.scrollTo(index)}
                             aria-label={`Go to slide ${index + 1}`}
                             className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${current === index
-                                ? "w-8 bg-[#D89B33]"
-                                : "w-2.5 bg-amber-200 hover:bg-amber-300"
+                                ? "w-8 bg-[#C46D77]"
+                                : "w-2.5 bg-rose-200 hover:bg-rose-300"
                                 }`}
                         />
                     ))}

@@ -20,7 +20,7 @@ export default function HeroSection() {
     const data = site.hero;
 
     return (
-        <section className="relative w-full min-h-[75vh] lg:min-h-[84vh] flex items-center justify-start overflow-hidden bg-white">
+        <section id="hero" className="relative w-full min-h-[75vh] lg:min-h-[84vh] flex items-center justify-start overflow-hidden bg-white scroll-mt-20">
             {/* Background image */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -29,7 +29,7 @@ export default function HeroSection() {
                     fill
                     priority
                     sizes="100vw"
-                    className="object-cover object-right lg:object-center brightness-[0.95]"
+                    className="object-cover object-right lg:object-right brightness-[0.98]"
                 />
                 {/* Soft overlay */}
                 <div className="absolute inset-y-0 left-0 w-full sm:w-4/5 md:w-3/5 lg:w-[52%] bg-gradient-to-r from-white/95 via-white/75 to-transparent z-10 pointer-events-none" />
@@ -43,25 +43,25 @@ export default function HeroSection() {
                     animate="visible"
                     className="max-w-2xl flex flex-col items-start gap-4 lg:gap-4"
                 >
-                    {/* Subtitle */}
+                    {/* Subtitle text */}
                     <motion.div
                         variants={subtitleVariants}
-                        className="flex items-center gap-3 text-[#D89B33]"
+                        className="flex items-center gap-3 text-[#C46D77]"
                     >
-                        <span className="w-8 md:w-12 h-[2px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-12 h-[2px] bg-[#C46D77]" />
                         <span className="font-allura text-3xl sm:text-4xl md:text-5xl tracking-wide">
                             {data.subtitle}
                         </span>
                     </motion.div>
 
-                    {/* Headline */}
+                    {/* Main headline */}
                     <motion.h1
                         variants={titleVariants}
                         className="font-bodoni font-serif text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-black leading-[1.15]"
                     >
                         {data.titleLine1} <br />
                         {data.titleLine2}{" "}
-                        <span className="bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] bg-clip-text text-transparent font-bold">
+                        <span className="bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] bg-clip-text text-transparent font-bold">
                             {data.titleHighlight}
                         </span>
                     </motion.h1>
@@ -75,7 +75,7 @@ export default function HeroSection() {
                             <React.Fragment key={cat}>
                                 <span>{cat}</span>
                                 {idx < data.categories.length - 1 && (
-                                    <span className="text-[#D89B33]">–</span>
+                                    <span className="text-[#C46D77]">–</span>
                                 )}
                             </React.Fragment>
                         ))}
@@ -90,7 +90,8 @@ export default function HeroSection() {
                             whileHover={buttonHoverTap.hover}
                             whileTap={buttonHoverTap.tap}
                             href={data.ctaButton.href}
-                            className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] text-gray-950 font-semibold px-7 py-3.5 shadow-xl hover:shadow-[#D89B33]/30 transition-all text-base cursor-pointer"
+                            data-open-modal="contact"
+                            className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-7 py-3.5 shadow-xl hover:shadow-[#C46D77]/30 transition-all text-base cursor-pointer"
                         >
                             <span>{data.ctaButton.text}</span>
                             <HiArrowRight className="text-xl transition-transform group-hover:translate-x-1.5" />

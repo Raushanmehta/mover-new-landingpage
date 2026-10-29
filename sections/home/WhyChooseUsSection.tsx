@@ -34,7 +34,7 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
     const data = propData || site.whyChooseUs;
 
     return (
-        <section className="w-full bg-white py-8 lg:py-14 overflow-hidden">
+        <section id="why-choose-us" className="w-full bg-white py-8 lg:py-14 overflow-hidden scroll-mt-20">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
 
                 {/* Feature grid */}
@@ -45,17 +45,17 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                     viewport={defaultViewport}
                     className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4"
                 >
-                    {/* Card 1: Gold Card */}
+                    {/* Card 1 */}
                     <motion.div
                         variants={cardVariants}
                         whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                        className="relative bg-gradient-to-br from-[#D89B33] via-[#E2A944] to-[#B87A1E] p-6 sm:p-8 shadow-md min-h-[240px] flex flex-col justify-between overflow-hidden text-gray-950"
+                        className="relative bg-gradient-to-br from-[#C46D77] via-[#D9828F] to-[#A84E59] p-6 sm:p-8 shadow-md min-h-[240px] flex flex-col justify-between overflow-hidden text-white"
                     >
-                        <GiFlowerEmblem className="absolute -bottom-6 -right-6 text-9xl text-black/10 pointer-events-none" />
+                        <GiFlowerEmblem className="absolute -bottom-6 -right-6 text-9xl text-white/15 pointer-events-none" />
 
                         <div>
-                            <span className="block w-8 h-[2px] bg-gray-950 mb-3" />
-                            <h3 className="font-serif text-2xl font-bold leading-tight whitespace-pre-line">
+                            <span className="block w-8 h-[2px] bg-white mb-3" />
+                            <h3 className="font-serif text-2xl font-bold leading-tight whitespace-pre-line text-white">
                                 {data.card1.title}
                             </h3>
                         </div>
@@ -65,13 +65,13 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                             whileTap={buttonHoverTap.tap}
                             href={data.card1.href}
                             aria-label={data.card1.title}
-                            className="w-10 h-10 rounded-full bg-amber-100 text-gray-950 flex items-center justify-center shadow mt-6 cursor-pointer"
+                            className="w-10 h-10 rounded-full bg-white text-[#C46D77] flex items-center justify-center shadow mt-6 cursor-pointer"
                         >
                             <HiArrowRight className="text-lg" />
                         </motion.a>
                     </motion.div>
 
-                    {/* Card 2: Image */}
+                    {/* Card 2 */}
                     <motion.div
                         variants={cardVariants}
                         className="relative min-h-[240px] overflow-hidden shadow-md group"
@@ -85,7 +85,7 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                         />
                     </motion.div>
 
-                    {/* Card 3: Image */}
+                    {/* Card 3 */}
                     <motion.div
                         variants={cardVariants}
                         className="relative min-h-[240px] overflow-hidden shadow-md group"
@@ -99,7 +99,7 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                         />
                     </motion.div>
 
-                    {/* Card 4: Dark Card */}
+                    {/* Card 4 */}
                     <motion.div
                         variants={cardVariants}
                         whileHover={{ y: -4, transition: { duration: 0.3 } }}
@@ -108,8 +108,8 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                         <PiHairDryer className="absolute -bottom-6 -right-6 text-9xl text-white/5 pointer-events-none" />
 
                         <div>
-                            <span className="block w-8 h-[2px] bg-[#D89B33] mb-3" />
-                            <h3 className="font-serif text-2xl font-bold leading-tight whitespace-pre-line">
+                            <span className="block w-8 h-[2px] bg-[#C46D77] mb-3" />
+                            <h3 className="font-serif text-2xl font-bold leading-tight whitespace-pre-line text-white">
                                 {data.card4.title}
                             </h3>
                         </div>
@@ -119,7 +119,7 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                             whileTap={buttonHoverTap.tap}
                             href={data.card4.href}
                             aria-label={data.card4.title}
-                            className="w-10 h-10 rounded-full bg-amber-100 text-gray-950 flex items-center justify-center shadow mt-6 cursor-pointer"
+                            className="w-10 h-10 rounded-full bg-rose-50 text-[#C46D77] flex items-center justify-center shadow mt-6 cursor-pointer"
                         >
                             <HiArrowRight className="text-lg" />
                         </motion.a>
@@ -137,9 +137,9 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                     {/* Cursive Subtitle */}
                     <motion.div
                         variants={subtitleVariants}
-                        className="flex items-center gap-3 text-[#D89B33]"
+                        className="flex items-center gap-3 text-[#C46D77]"
                     >
-                        <span className="w-8 md:w-12 h-[2px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-12 h-[2px] bg-[#C46D77]" />
                         <span className="font-allura text-3xl sm:text-4xl md:text-5xl tracking-wide">
                             {data.subtitle}
                         </span>
@@ -151,7 +151,7 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                         className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 uppercase leading-tight"
                     >
                         {data.title}{" "}
-                        <span className="bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] bg-clip-text text-transparent font-bold">
+                        <span className="bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] bg-clip-text text-transparent font-bold">
                             {data.titleHighlight}
                         </span>
                     </motion.h2>
@@ -176,11 +176,11 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                                     <motion.div
                                         variants={fadeInUp}
                                         className="flex items-start gap-4"
-                                    >
+                                     >
                                         <motion.div
                                             whileHover={{ scale: 1.1, rotate: 6 }}
                                             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                                            className="w-14 h-14 rounded-full bg-amber-100/80 border border-[#D89B33]/30 flex items-center justify-center text-[#B87A1E] shrink-0 mt-1 cursor-pointer"
+                                            className="w-14 h-14 rounded-full bg-rose-50 border border-[#C46D77]/30 flex items-center justify-center text-[#A84E59] shrink-0 mt-1 cursor-pointer"
                                         >
                                             <IconComponent className="text-2xl" />
                                         </motion.div>
@@ -202,14 +202,15 @@ export default function WhyChooseUsSection({ data: propData, showButton = true }
                         })}
                     </motion.div>
 
-                    {/* CTA Button */}
-                    {showButton && data.ctaButton && (
+                    {/* CTA button */}
+                    {showButton && data.ctaButton?.text && (
                         <div className="pt-2">
                             <motion.a
                                 whileHover={buttonHoverTap.hover}
                                 whileTap={buttonHoverTap.tap}
                                 href={data.ctaButton.href}
-                                className="group flex items-center gap-3 bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] text-gray-950 font-semibold px-7 py-3.5 shadow-md hover:shadow-lg transition-all text-sm md:text-base cursor-pointer"
+                                data-open-modal="contact"
+                                className="group flex items-center gap-3 bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-7 py-3.5 shadow-md hover:shadow-lg transition-all text-sm md:text-base cursor-pointer"
                             >
                                 <span>{data.ctaButton.text}</span>
                                 <HiArrowRight className="text-xl transition-transform group-hover:translate-x-1" />

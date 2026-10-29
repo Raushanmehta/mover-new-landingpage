@@ -355,14 +355,12 @@ export const lineExpandVariants: Variants = {
     },
 };
 
-/**
- * Social & Card Interactive Variants
- */
+/* Social variants */
 export const socialIconHover: { rest: TargetAndTransition; hover: TargetAndTransition; tap: TargetAndTransition } = {
     rest: { scale: 1 },
     hover: {
         scale: 1.15,
-        backgroundColor: "#D89B33",
+        backgroundColor: "#C46D77",
         color: "#ffffff",
         transition: { type: "spring", stiffness: 400, damping: 17 },
     },

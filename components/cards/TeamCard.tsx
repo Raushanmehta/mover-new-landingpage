@@ -25,7 +25,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
             key={member.id}
             variants={cardVariants}
             whileHover={cardHover.hover}
-            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center group cursor-pointer"
+            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center text-center group "
         >
             {/* Portrait image */}
             <div className="relative w-full h-[280px] lg:h-[200px] overflow-hidden bg-gray-100">
@@ -34,7 +34,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
                     alt={member.name}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
             </div>
 
@@ -45,7 +45,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
                         {member.name}
                     </h3>
 
-                    <span className="block text-[11px] font-bold tracking-[0.2em] text-[#D89B33] uppercase mt-1 mb-2">
+                    <span className="block text-[11px] font-bold tracking-[0.2em] text-[#C46D77] uppercase mt-1 mb-2">
                         {member.role}
                     </span>
 
@@ -63,7 +63,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${member.name} Facebook`}
-                        className="w-10 h-10 rounded-full bg-amber-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
+                        className="w-10 h-10 rounded-full bg-rose-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
                     >
                         <FaFacebookF className="h-5 w-5" />
                     </motion.a>
@@ -75,7 +75,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${member.name} Instagram`}
-                        className="w-10 h-10 rounded-full bg-amber-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
+                        className="w-10 h-10 rounded-full bg-rose-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
                     >
                         <FaInstagram className="h-5 w-5" />
                     </motion.a>
@@ -87,7 +87,7 @@ export default function TeamCard({ member }: { member: TeamMember; index?: numbe
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${member.name} LinkedIn`}
-                        className="w-10 h-10 rounded-full bg-amber-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
+                        className="w-10 h-10 rounded-full bg-rose-50 text-gray-800 flex items-center justify-center text-xs transition-colors shadow-sm"
                     >
                         <FaLinkedinIn className="h-5 w-5" />
                     </motion.a>

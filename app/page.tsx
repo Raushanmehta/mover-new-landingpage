@@ -1,23 +1,22 @@
 import AboutSection from "@/sections/home/AboutSection";
-import BlogSection from "@/sections/home/BlogSection";
-import CtaSection from "@/sections/home/CtaSection";
 import HeroSection from "@/sections/home/HeroSection";
 import ServiceSection from "@/sections/home/ServiceSection";
 import TeamSection from "@/sections/home/TeamSection";
 import TestimonialSection from "@/sections/home/TestimonialSection";
 import WhyChooseUsSection from "@/sections/home/WhyChooseUsSection";
+import FaqsSection from "@/sections/home/FaqsSection";
 
 export default function Home() {
   return (
-    <div>
+    <main>
+      {/* Landing page sections */}
       <HeroSection />
       <AboutSection />
       <ServiceSection />
       <WhyChooseUsSection />
-      <CtaSection />
       <TeamSection />
       <TestimonialSection />
-      <BlogSection />
-    </div>
+      <FaqsSection />
+    </main>
   );
 }

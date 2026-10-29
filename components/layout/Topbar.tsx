@@ -33,38 +33,38 @@ export default function Topbar() {
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 flex flex-row justify-between items-center gap-4">
                 {/* Contact info */}
                 <div className="flex items-center gap-4 lg:gap-6 flex-wrap">
-                    {/* Location */}
+                    {/* Location info */}
                     <div className="flex items-center gap-2">
-                        <FaMapMarkerAlt className="text-[#D89B33] text-sm shrink-0" />
+                        <FaMapMarkerAlt className="text-[#C46D77] text-sm shrink-0" />
                         <span className="font-medium text-gray-700">{data.location}</span>
                     </div>
 
-                    <span className="h-3.5 w-[1px] bg-[#D89B33]/40 inline-block" />
+                    <span className="h-3.5 w-[1px] bg-[#C46D77]/40 inline-block" />
 
-                    {/* Phone */}
+                    {/* Phone info */}
                     <a
                         href={data.phoneHref}
-                        className="flex items-center gap-2 hover:text-[#D89B33] transition-colors"
+                        className="flex items-center gap-2 hover:text-[#C46D77] transition-colors"
                     >
-                        <FaPhoneAlt className="text-[#D89B33] text-xs shrink-0" />
+                        <FaPhoneAlt className="text-[#C46D77] text-xs shrink-0" />
                         <span className="font-medium text-gray-700">{data.phone}</span>
                     </a>
 
-                    <span className="h-3.5 w-[1px] bg-[#D89B33]/40 inline-block" />
+                    <span className="h-3.5 w-[1px] bg-[#C46D77]/40 inline-block" />
 
-                    {/* Email */}
+                    {/* Email info */}
                     <a
                         href={data.emailHref}
-                        className="flex items-center gap-2 hover:text-[#D89B33] transition-colors"
+                        className="flex items-center gap-2 hover:text-[#C46D77] transition-colors"
                     >
-                        <FaEnvelope className="text-[#D89B33] text-xs shrink-0" />
+                        <FaEnvelope className="text-[#C46D77] text-xs shrink-0" />
                         <span className="font-medium text-gray-700">{data.email}</span>
                     </a>
                 </div>
 
                 {/* Social links */}
                 <div className="flex items-center">
-                    <span className="h-3.5 w-[1px] bg-[#D89B33]/40 mr-4 inline-block" />
+                    <span className="h-3.5 w-[1px] bg-[#C46D77]/40 mr-4 inline-block" />
 
                     <div className="flex items-center gap-4 lg:gap-5 text-gray-800">
                         {data.socialLinks.map((social, index) => {
@@ -72,7 +72,7 @@ export default function Topbar() {
                             return (
                                 <motion.a
                                     key={index}
-                                    whileHover={{ scale: 1.15, color: "#D89B33" }}
+                                    whileHover={{ scale: 1.15, color: "#C46D77" }}
                                     whileTap={{ scale: 0.95 }}
                                     href={social.href}
                                     target="_blank"
@@ -86,7 +86,7 @@ export default function Topbar() {
                         })}
                     </div>
 
-                    <span className="h-3.5 w-[1px] bg-[#D89B33]/40 ml-4 inline-block" />
+                    <span className="h-3.5 w-[1px] bg-[#C46D77]/40 ml-4 inline-block" />
                 </div>
             </div>
         </motion.div>

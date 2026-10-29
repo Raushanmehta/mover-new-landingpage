@@ -34,7 +34,7 @@ export default function TestimonialCard({
             key={data.id}
             variants={cardVariants}
             whileHover={cardHover.hover}
-            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 grid grid-cols-1 sm:grid-cols-2 border border-amber-50 h-full"
+            className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 grid grid-cols-1 sm:grid-cols-2 border border-rose-50 h-full"
         >
             {/* Client image */}
             <div className="relative w-full h-[220px] sm:h-full min-h-[220px]">
@@ -49,7 +49,7 @@ export default function TestimonialCard({
 
             {/* Quote and details */}
             <div className="p-5 flex flex-col justify-between gap-2">
-                <FaQuoteLeft className="text-[#D89B33]/60 text-2xl" />
+                <FaQuoteLeft className="text-[#C46D77]/60 text-2xl" />
 
                 <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
                     {data.quote}
@@ -57,7 +57,7 @@ export default function TestimonialCard({
 
                 <div>
                     {/* Rating stars */}
-                    <div className="flex items-center gap-1 text-[#D89B33] text-xs mb-2">
+                    <div className="flex items-center gap-1 text-[#C46D77] text-xs mb-2">
                         {[...Array(ratingCount)].map((_, i) => (
                             <FaStar key={i} />
                         ))}
@@ -67,7 +67,7 @@ export default function TestimonialCard({
                         {data.name}
                     </h3>
 
-                    <span className="block text-[10px] font-bold tracking-[0.2em] text-[#D89B33] uppercase mt-0.5">
+                    <span className="block text-[10px] font-bold tracking-[0.2em] text-[#C46D77] uppercase mt-0.5">
                         {data.role}
                     </span>
                 </div>

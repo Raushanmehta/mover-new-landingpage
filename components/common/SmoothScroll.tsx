@@ -44,7 +44,7 @@ const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  // Reset scroll on route
+  // Reset scroll
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });

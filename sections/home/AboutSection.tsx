@@ -35,7 +35,7 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
     const data = propData || site.about;
 
     return (
-        <section className="w-full bg-white py-8 lg:py-14 overflow-hidden">
+        <section id="about" className="w-full bg-white py-8 lg:py-14 overflow-hidden scroll-mt-20">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16 grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-start">
 
                 {/* Image showcase */}
@@ -48,10 +48,10 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                 >
                     <div className="relative w-full max-w-[550px] lg:max-w-[580px] h-[420px] sm:h-[490px] lg:h-[530px]">
 
-                        {/* Background Gold Decorative Frame 1 */}
-                        <div className="absolute -top-4 -left-4 w-full h-[90%] border-2 border-[#D89B33]/60 z-0" />
+                        {/* Decorative frame */}
+                        <div className="absolute -top-4 -left-4 w-full h-[90%] border-2 border-[#C46D77]/60 z-0" />
 
-                        {/* Main Portrait Image */}
+                        {/* Portrait image */}
                         <motion.div
                             variants={imageScaleIn}
                             className="relative z-10 w-full h-[90%] overflow-hidden shadow-xl"
@@ -65,10 +65,10 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                             />
                         </motion.div>
 
-                        {/* Background Gold Decorative Frame 2 */}
-                        <div className="absolute -bottom-4 right-0 lg:-right-4 w-[38%] h-[52%] border-2 border-[#D89B33]/60 z-0" />
+                        {/* Secondary frame */}
+                        <div className="absolute -bottom-4 right-0 lg:-right-4 w-[38%] h-[52%] border-2 border-[#C46D77]/60 z-0" />
 
-                        {/* Overlapping Salon Interior Image */}
+                        {/* Salon image */}
                         <motion.div
                             variants={fadeInUp}
                             className="absolute bottom-0 right-2 lg:-right-8 z-20 w-[38%] h-[52%] overflow-hidden shadow-2xl"
@@ -85,7 +85,7 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                     </div>
                 </motion.div>
 
-                {/* Right Side: Content Details */}
+                {/* Content details */}
                 <motion.div
                     variants={fadeInRight}
                     initial="hidden"
@@ -97,27 +97,27 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                     {/* Cursive Subtitle */}
                     <motion.div
                         variants={subtitleVariants}
-                        className="flex items-center gap-3 text-[#D89B33]"
+                        className="flex items-center gap-3 text-[#C46D77]"
                     >
-                        <span className="w-8 md:w-12 h-[2px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-12 h-[2px] bg-[#C46D77]" />
                         <span className="font-allura text-3xl sm:text-4xl md:text-5xl tracking-wide">
                             {data.subtitle}
                         </span>
                     </motion.div>
 
-                    {/* Headline */}
+                    {/* Main headline */}
                     <motion.h2
                         variants={titleVariants}
                         className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.2]"
                     >
                         {data.titleLine1} <br />
                         {data.titleLine2}{" "}
-                        <span className="bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] bg-clip-text text-transparent font-bold">
+                        <span className="bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] bg-clip-text text-transparent font-bold">
                             {data.titleHighlight}
                         </span>
                     </motion.h2>
 
-                    {/* Description */}
+                    {/* Description text */}
                     <motion.p
                         variants={descVariants}
                         className="text-gray-600 text-sm sm:text-base leading-relaxed"
@@ -150,7 +150,7 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                                     <motion.div
                                         whileHover={{ scale: 1.1, rotate: 6 }}
                                         transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                                        className="w-14 h-14 rounded-full bg-amber-50 border border-[#D89B33]/30 flex items-center justify-center text-[#D89B33] shadow-sm cursor-pointer"
+                                        className="w-14 h-14 rounded-full bg-rose-50 border border-[#C46D77]/30 flex items-center justify-center text-[#C46D77] shadow-sm cursor-pointer"
                                     >
                                         <IconComponent className="text-4xl" />
                                     </motion.div>
@@ -162,14 +162,15 @@ export default function AboutSection({ data: propData, showButton = true }: Abou
                         })}
                     </motion.div>
 
-                    {/* CTA Button */}
+                    {/* CTA button */}
                     {showButton && data.ctaButton && (
                         <div className="pt-1">
                             <motion.a
                                 whileHover={buttonHoverTap.hover}
                                 whileTap={buttonHoverTap.tap}
                                 href={data.ctaButton.href}
-                                className="group flex items-center gap-3 bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] text-gray-950 font-semibold px-7 py-3.5 shadow-md hover:shadow-lg transition-all text-sm md:text-base cursor-pointer"
+                                data-open-modal="contact"
+                                className="group flex items-center gap-3 bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-7 py-3.5 shadow-md hover:shadow-lg transition-all text-sm md:text-base cursor-pointer"
                             >
                                 <span>{data.ctaButton.text}</span>
                                 <HiArrowRight className="text-xl transition-transform group-hover:translate-x-1" />

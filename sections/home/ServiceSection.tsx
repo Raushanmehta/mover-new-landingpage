@@ -49,11 +49,11 @@ interface ServiceSectionProps {
 export default function ServiceSection({ data: propData }: ServiceSectionProps = {}) {
     const data = propData || site.services;
     const servicesData = data.servicesList;
-    const [activeTab, setActiveTab] = useState(1);
+    const [activeTab, setActiveTab] = useState(2);
     const currentService = servicesData?.[activeTab] || servicesData?.[0];
 
     return (
-        <section className="w-full bg-[#FAF9F6] py-8 lg:py-14 overflow-hidden">
+        <section id="services" className="w-full bg-[#FFF5F5] py-8 lg:py-14 overflow-hidden scroll-mt-20">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-4 md:px-8 lg:px-12 xl:px-16">
 
                 {/* Section Header */}
@@ -65,13 +65,13 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                 >
                     <motion.div
                         variants={subtitleVariants}
-                        className="flex items-center gap-3 text-[#D89B33]"
+                        className="flex items-center gap-3 text-[#C46D77]"
                     >
-                        <span className="w-8 md:w-12 h-[2px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-12 h-[2px] bg-[#C46D77]" />
                         <span className="font-allura text-3xl sm:text-4xl md:text-5xl tracking-wide">
                             {data.subtitle}
                         </span>
-                        <span className="w-8 md:w-12 h-[2px] bg-[#D89B33]" />
+                        <span className="w-8 md:w-12 h-[2px] bg-[#C46D77]" />
                     </motion.div>
 
                     <motion.h2
@@ -79,7 +79,7 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                         className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 uppercase leading-tight"
                     >
                         {data.title}{" "}
-                        <span className="bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] bg-clip-text text-transparent font-bold">
+                        <span className="bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] bg-clip-text text-transparent font-bold">
                             {data.titleHighlight}
                         </span>
                     </motion.h2>
@@ -112,8 +112,8 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                 whileTap={{ scale: 0.96 }}
                                 onClick={() => setActiveTab(index)}
                                 className={`relative flex flex-col items-center justify-center p-4 transition-all duration-300 cursor-pointer ${isActive
-                                    ? "bg-gradient-to-b from-[#D89B33] via-[#E2A944] to-[#B87A1E] text-white shadow-xl"
-                                    : "bg-white border border-gray-200 text-gray-800 hover:border-[#D89B33]/50 hover:shadow-md"
+                                    ? "bg-gradient-to-b from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white shadow-xl"
+                                    : "bg-white border border-gray-200 text-gray-800 hover:border-[#C46D77]/50 hover:shadow-md"
                                     }`}
                             >
                                 {/* Icon Container */}
@@ -121,7 +121,7 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                     whileHover={{ rotate: 10, scale: 1.1 }}
                                     className={`w-14 h-14 rounded-full flex items-center justify-center mb-2.5 transition-colors ${isActive
                                         ? "bg-white/20 text-white"
-                                        : "bg-amber-50 text-[#D89B33]"
+                                        : "bg-rose-50 text-[#C46D77]"
                                         }`}
                                 >
                                     <IconComponent className="text-4xl" />
@@ -132,16 +132,16 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                     {service.name}
                                 </span>
 
-                                {/* Active Indicator Arrow */}
+                                {/* Active indicator */}
                                 {isActive && (
-                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-[#B87A1E]" />
+                                    <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-[#A84E59]" />
                                 )}
                             </motion.button>
                         );
                     })}
                 </motion.div>
 
-                {/* Active Service Content Display */}
+                {/* Active service */}
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentService.id}
@@ -157,12 +157,12 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                         >
                             <div className="relative w-full max-w-[540px] sm:max-w-[500px] lg:max-w-[510px] h-[380px] sm:h-[400px] lg:h-[440px]">
 
-                                {/* Gold Frame Accent 1 */}
-                                <div className="absolute top-3 sm:top-4 -left-3 sm:-left-4 w-full h-[88%] border-2 border-[#D89B33]/50 rounded-md z-0" />
+                                {/* Frame accent */}
+                                <div className="absolute top-3 sm:top-4 -left-3 sm:-left-4 w-full h-[88%] border-2 border-[#C46D77]/50 rounded-md z-0" />
 
-                                {/* Main Action Image */}
-                                <Link
-                                    href={currentService.href || `/services/${currentService.slug || currentService.id}`}
+                                {/* Main image */}
+                                <div
+                                    data-open-modal="contact"
                                     className="relative z-10 block w-full h-[88%] rounded-lg overflow-hidden shadow-xl group cursor-pointer"
                                 >
                                     <motion.div
@@ -177,12 +177,12 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                             className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                                         />
                                     </motion.div>
-                                </Link>
+                                </div>
 
-                                {/* Gold Frame Accent 2 */}
-                                <div className="absolute bottom-3 sm:bottom-4 -right-1 lg:-right-11 w-[38%] h-[58%] border-2 border-[#D89B33]/50 rounded-md z-0" />
+                                {/* Decorative frame */}
+                                <div className="absolute bottom-3 sm:bottom-4 -right-1 lg:-right-11 w-[38%] h-[58%] border-2 border-[#C46D77]/50 rounded-md z-0" />
 
-                                {/* Secondary Inset Salon Image */}
+                                {/* Salon image */}
                                 <motion.div
                                     variants={fadeInUp}
                                     className="absolute bottom-0 right-2 lg:-right-8 z-20 w-[38%] h-[58%] overflow-hidden shadow-2xl"
@@ -205,19 +205,19 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                             className="w-full flex flex-col items-start gap-2 pt-1"
                         >
                             <div>
-                                {/* Headline */}
+                                {/* Service title */}
                                 <Link
-                                    href={currentService.href || `/services/${currentService.slug || currentService.id}`}
+                                    href={currentService.href || "#services"}
                                     className="group"
                                 >
                                     <motion.h3
                                         variants={titleVariants}
-                                        className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.2] group-hover:text-[#D89B33] transition-colors cursor-pointer"
+                                        className="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 leading-[1.2] group-hover:text-[#C46D77] transition-colors cursor-pointer"
                                     >
                                         {currentService.title}
                                     </motion.h3>
                                 </Link>
-                                <span className="block w-12 h-[3px] bg-[#D89B33] mt-2 rounded-full" />
+                                <span className="block w-12 h-[3px] bg-[#C46D77] mt-2 rounded-full" />
                             </div>
 
                             <motion.p
@@ -238,7 +238,7 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                         variants={fadeInUp}
                                         className="flex items-start gap-3"
                                     >
-                                        <FaCheckCircle className="text-[#D89B33] text-xl shrink-0 mt-0.5" />
+                                        <FaCheckCircle className="text-[#C46D77] text-xl shrink-0 mt-0.5" />
                                         <span className="text-sm font-medium text-gray-800">
                                             {point}
                                         </span>
@@ -246,21 +246,22 @@ export default function ServiceSection({ data: propData }: ServiceSectionProps =
                                 ))}
                             </motion.div>
 
-                            {/* CTA Button */}
+                            {/* CTA button */}
                             <div className="pt-2">
-                                <Link
-                                    href={currentService.href || `/services/${currentService.slug || currentService.id}`}
-                                    className="inline-block"
+                                <button
+                                    type="button"
+                                    data-open-modal="contact"
+                                    className="inline-block cursor-pointer"
                                 >
                                     <motion.div
                                         whileHover={buttonHoverTap.hover}
                                         whileTap={buttonHoverTap.tap}
-                                        className="group flex items-center gap-3 bg-gradient-to-r from-[#D89B33] via-[#E2A944] to-[#B87A1E] text-gray-950 font-semibold px-7 py-3 shadow-md hover:shadow-lg transition-all text-sm sm:text-base cursor-pointer"
+                                        className="group flex items-center gap-3 bg-gradient-to-r from-[#C46D77] via-[#D9828F] to-[#A84E59] text-white font-semibold px-7 py-3 shadow-md hover:shadow-lg transition-all text-sm sm:text-base cursor-pointer"
                                     >
-                                        <span>{data.ctaButton?.text || "View More"}</span>
+                                        <span>{data.ctaButton?.text || "Book Treatment"}</span>
                                         <HiArrowRight className="text-xl transition-transform group-hover:translate-x-1" />
                                     </motion.div>
-                                </Link>
+                                </button>
                             </div>
 
                         </motion.div>
